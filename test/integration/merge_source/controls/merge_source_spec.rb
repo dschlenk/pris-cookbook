@@ -3,7 +3,8 @@ describe pris_requisition('foomerge') do
   its('requisition_name') { should eq 'foomerge' }
   its('source') { should eq 'merge' }
   its('source_properties') { should eq 'A.url' => 'http://localhost:8000/requisitions/foo', 'A.keepAll' => 'false', 'B.url' => 'http://localhost:8000/requisitions/foohttp', 'B.keepAll' => 'true' }
-  its('content') { should eq <<-EOF
+  its('content') do
+    should eq <<-EOF
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" foreign-source="foomerge">
     <node node-label="127.0.0.2" foreign-id="127.0.0.2">
@@ -17,5 +18,5 @@ describe pris_requisition('foomerge') do
     </node>
 </model-import>
 EOF
-  }
+  end
 end

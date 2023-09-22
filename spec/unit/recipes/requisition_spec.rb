@@ -6,7 +6,7 @@
 
 require 'spec_helper'
 
-describe 'pris_test::requisition' do
+describe 'pris_test::xls_source' do
   context 'When all attributes are default, on the platform centos 7.8.2003' do
     let(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'centos', version: '7.8.2003')
@@ -18,8 +18,7 @@ describe 'pris_test::requisition' do
     end
 
     it 'create requisition myRouter' do
-      expect(chef_run).to create_pris_requisition('create myRouter').with(source: 'xls', source_properties: {'file' => '../myInventory.xls'}, requisition_name: 'myRouter')
+      expect(chef_run).to create_pris_requisition('create myRouter').with(source: 'xls', source_properties: { 'file' => '../myInventory.xls' }, requisition_name: 'myRouter')
     end
-
   end
 end

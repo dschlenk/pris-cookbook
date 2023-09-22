@@ -18,7 +18,7 @@ describe 'pris::default' do
     end
 
     it 'creates a template with the global.properties' do
-      expect(chef_run).to create_template("/opt/opennms-pris/global.properties")
+      expect(chef_run).to create_template('/opt/opennms-pris/global.properties')
     end
 
     it 'create pris home directory' do
@@ -34,9 +34,8 @@ describe 'pris::default' do
     end
 
     it 'creates a template with the opennms-pris.service' do
-      expect(chef_run).to create_template("/etc/systemd/system/opennms-pris.service")
+      expect(chef_run).to create_template('/etc/systemd/system/opennms-pris.service')
     end
-
   end
 
   context 'When all attributes are default, on the platform centos 6.10' do
@@ -45,12 +44,12 @@ describe 'pris::default' do
       runner.converge(described_recipe)
     end
 
-     it 'converges successfully' do
+    it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
 
-    it 'creates a template with the opennms-pris-v6.service' do
-      expect(chef_run).to create_template("/etc/init.d/opennms-pris")
+    it 'creates a template for the service in /etc/init.d' do
+      expect(chef_run).to create_template('/etc/init.d/opennms-pris')
     end
   end
 end

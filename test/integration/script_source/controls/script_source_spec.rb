@@ -2,7 +2,8 @@ describe pris_requisition('fooscript') do
   its('requisition_name') { should eq 'fooscript' }
   its('source') { should eq 'script' }
   its('source_properties') { should eq 'file' => 'myGroovySource.groovy', 'count' => '3' }
-  its('content') { should eq <<-EOF
+  its('content') do
+    should eq <<-EOF
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" foreign-source="fooscript">
     <node node-label="MyNodeLabel0" foreign-id="MyForeignId0">
@@ -37,5 +38,5 @@ describe pris_requisition('fooscript') do
     </node>
 </model-import>
 EOF
-  }
+  end
 end

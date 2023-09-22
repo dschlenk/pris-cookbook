@@ -3,7 +3,8 @@ describe pris_requisition('myRouter') do
   its('source') { should eq 'xls' }
   its('source_properties') { should eq 'file' => '../myInventory.xls' }
   its('mapper') { should eq 'echo' }
-  its('content') { should eq <<-EOF
+  its('content') do
+    should eq <<-EOF
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" foreign-source="myRouter">
     <node node-label="bbone-gw1" foreign-id="bbone-gw1">
@@ -41,7 +42,7 @@ describe pris_requisition('myRouter') do
     </node>
 </model-import>
 EOF
-  }
+  end
 end
 
 describe pris_requisition('myServer') do
@@ -49,7 +50,8 @@ describe pris_requisition('myServer') do
   its('source') { should eq 'xls' }
   its('source_properties') { should eq 'file' => '../myInventory.xls' }
   its('mapper') { should eq 'echo' }
-  its('content') { should eq <<-EOF
+  its('content') do
+    should eq <<-EOF
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" foreign-source="myServer">
     <node node-label="dc01" foreign-id="dc01" location="Default">
@@ -90,5 +92,5 @@ describe pris_requisition('myServer') do
     </node>
 </model-import>
 EOF
-  }
+  end
 end

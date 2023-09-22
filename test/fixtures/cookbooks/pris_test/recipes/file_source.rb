@@ -11,4 +11,3 @@ end
 cookbook_file "#{node[:pris][:home]}/requisitions/foo/foobar.xml" do
   source 'foobar.xml'
 end
-

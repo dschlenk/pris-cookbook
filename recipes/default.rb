@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 # Copyright (c) 2015 ConvergeOne Holdings Corp.
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -39,7 +39,7 @@ end
 bash 'extract tarball' do
   code "tar -zxvf #{filename} --strip 1 && touch #{app_home}/configured"
   cwd app_home
-  not_if{ File.exists?("#{app_home}/configured") }
+  not_if { File.exist?("#{app_home}/configured") }
 end
 
 template "#{app_home}/global.properties" do
@@ -85,4 +85,3 @@ end
 service 'opennms-pris' do
   action [:enable, :start]
 end
-

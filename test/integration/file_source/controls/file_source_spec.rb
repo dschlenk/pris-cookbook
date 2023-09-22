@@ -2,7 +2,7 @@ describe pris_requisition('foo') do
   its('requisition_name') { should eq 'foo' }
   its('source') { should eq 'file' }
   its('source_properties') { should eq 'file' => 'foobar.xml' }
-  its('content') { 
+  its('content') do
     should eq <<-EOF
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" foreign-source="default">
@@ -38,5 +38,5 @@ describe pris_requisition('foo') do
     </node>
 </model-import>
 EOF
-  }
+  end
 end
