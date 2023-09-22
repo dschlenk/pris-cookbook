@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'java-properties'
+require 'rest-client'
 class PrisRequisition < Inspec.resource(1)
   name 'pris_requisition'
 
@@ -12,11 +13,11 @@ class PrisRequisition < Inspec.resource(1)
       its(\'source\') { should eq \'xls\' }
       its(\'source_properties\') { should eq \'file\' => \'../myInventory.xls\' }
       its(\'mapper\') { should eq \'echo\' }
+      its(\'content\') { should match /regex/ }
     end
   '
 
   def initialize(req_name)
-    puts "ehlo"
     @requisition_name = req_name
     requisition_file = "/opt/opennms-pris/requisitions/#{@requisition_name}/requisition.properties"
     props = JavaProperties.parse(inspec.file(requisition_file).content)
@@ -30,6 +31,7 @@ class PrisRequisition < Inspec.resource(1)
     end
     @script_file = []
     @script_file = props[:'script_file'].split(',') unless props[:'script_file'].nil?
+    @content = RestClient.get( "http://localhost:8000/requisitions/#{req_name}" ).body
   end
 
   attr_reader :requisition_name
@@ -43,6 +45,8 @@ class PrisRequisition < Inspec.resource(1)
   attr_reader :mapper_properties
 
   attr_reader :script_file
+
+  attr_reader :content
 
   private
 

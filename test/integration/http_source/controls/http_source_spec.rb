@@ -1,9 +1,8 @@
-require 'spec_helper'
-require 'helpers'
-
-describe 'http source based requisition name \'foo\'' do
-  let(:contents) do
-    input = <<-EOL
+describe pris_requisition('foohttp') do
+  its('requisition_name') { should eq 'foohttp' }
+  its('source') { should eq 'http' }
+  its('source_properties') { should eq 'url' => 'http://localhost/' }
+  its('content') { should eq <<-EOF
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" foreign-source="localhosts">
     <node node-label="127.0.0.1" foreign-id="127.0.0.1">
@@ -16,24 +15,6 @@ describe 'http source based requisition name \'foo\'' do
         <interface ip-addr="172.0.0.3" managed="true" snmp-primary="P"/>
     </node>
 </model-import>
-EOL
-    doc = REXML::Document.new input
-    output = ''
-    doc.write output
-    output
-  end
-
-  describe service('opennms-pris') do
-    it { should be_running }
-  end
-
-  describe file('/opt/opennms-pris/requisitions/foohttp/requisition.properties') do
-    it { should exist }
-  end
-
-  describe 'requisition contents' do
-    it 'is accurate' do
-      expect(requisition('foohttp')).to eq contents 
-    end
-  end
+EOF
+  }
 end

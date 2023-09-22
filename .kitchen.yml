@@ -1,6 +1,8 @@
 ---
 driver:
   name: vagrant
+  network:
+    - ["forwarded_port", {guest: 8000, host: 8000, auto_correct: true}]
 
 provisioner:
   name: chef_zero
@@ -27,6 +29,7 @@ suites:
       - recipe[yum-centos-ct::default]
       - recipe[pris_java::default]
       - recipe[pris::default]
+      - recipe[pris_test::file_source]
       - recipe[pris_test::http_source]
       - recipe[pris_test::jdbc_source]
       - recipe[pris_test::merge_source]
@@ -35,6 +38,11 @@ suites:
     verifier:
       inspec_tests:
         - path: test/integration/default
+        - path: test/integration/file_source
+        - path: test/integration/http_source
+        - path: test/integration/jdbc_source
+        - path: test/integration/merge_source
+        - path: test/integration/script_source
         - path: test/integration/xls_source
   - name: file_source
     run_list:
@@ -50,6 +58,10 @@ suites:
       - recipe[yum-centos-ct::default]
       - recipe[pris_java::default]
       - recipe[pris_test::http_source]
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/http_source
   - name: jdbc_source
     run_list:
       - recipe[yum-centos-ct::default]

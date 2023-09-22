@@ -1,9 +1,8 @@
-require 'spec_helper'
-require 'helpers'
-
-describe 'script source based requisition name \'fooscript\'' do
-  let(:contents) do
-    input = <<-EOL
+describe pris_requisition('fooscript') do
+  its('requisition_name') { should eq 'fooscript' }
+  its('source') { should eq 'script' }
+  its('source_properties') { should eq 'file' => 'myGroovySource.groovy', 'count' => '3' }
+  its('content') { should eq <<-EOF
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" foreign-source="fooscript">
     <node node-label="MyNodeLabel0" foreign-id="MyForeignId0">
@@ -37,24 +36,6 @@ describe 'script source based requisition name \'fooscript\'' do
         <asset name="country" value="Germany"/>
     </node>
 </model-import>
-EOL
-    doc = REXML::Document.new input
-    output = ''
-    doc.write output
-    output
-  end
-
-  describe service('opennms-pris') do
-    it { should be_running }
-  end
-
-  describe file('/opt/opennms-pris/requisitions/fooscript/requisition.properties') do
-    it { should exist }
-  end
-
-  describe 'requisition contents' do
-    it 'is accurate' do
-      expect(requisition('fooscript')).to eq contents 
-    end
-  end
+EOF
+  }
 end
