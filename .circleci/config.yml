@@ -1,13 +1,37 @@
 version: 2.1
 jobs:
-  build:
-    docker:
-      - image: cimg/ruby:2.5
+  test:  
+    machine:
+      image: ubuntu-2004:2023.07.01
     steps:
       - checkout
-      - run: bundle install
-      - run: bundle exec rake
+      - run:
+          name: install chefdk
+          command: |
+            TEMP_DEB="$(mktemp)" &&
+            wget -O "$TEMP_DEB" 'https://packages.chef.io/files/stable/chefdk/3.13.1/ubuntu/16.04/chefdk_3.13.1-1_amd64.deb' &&
+            sudo dpkg -i "$TEMP_DEB"
+            rm -f "$TEMP_DEB"
+      - run:
+          name: style
+          command: chef exec rake style
+      - run:
+          name: unit
+          command: chef exec rake unit
+      - run:
+          name: integration
+          command: chef exec rake integration
+
 workflows:
-  build_and_test:
+  version: 2
+  untagged-build:
     jobs:
-      - build
+      - test:
+  tagged-build:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
