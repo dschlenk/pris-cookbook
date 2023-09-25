@@ -8,6 +8,13 @@ jobs:
     steps:
       - checkout
       - run:
+        name: install vagrant
+        command: |
+          TEMP_DEB="${mktemp)" &&
+          wget -O "$TEMP_DEB" 'https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.deb' &&
+          sudo dpkg -i "$TEMP_DEB"
+          rm -f "$TEMP_DEB"
+      - run:
           name: install chefdk
           command: |
             TEMP_DEB="$(mktemp)" &&
