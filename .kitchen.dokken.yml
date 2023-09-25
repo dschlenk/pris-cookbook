@@ -3,7 +3,7 @@ driver:
   name: dokken
   chef_version: 14
   ports:
-    - 8000
+    - 8000:8000
 
 transport:
   name: dokken
