@@ -23,7 +23,7 @@ jobs:
             rm -f "$TEMP_DEB"
       - run:
           name: java-properties
-          command: chef gem install java-properties
+          command: chef gem install java-properties rest-client
       - run:
           name: style
           command: chef exec rake style
