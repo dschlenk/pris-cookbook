@@ -22,6 +22,9 @@ jobs:
             sudo dpkg -i "$TEMP_DEB"
             rm -f "$TEMP_DEB"
       - run:
+          name: java-properties
+          command: chef gem install java-properties
+      - run:
           name: style
           command: chef exec rake style
       - run:
