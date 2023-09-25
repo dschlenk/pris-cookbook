@@ -1,4 +1,5 @@
 version: 2.1
+
 jobs:
   test:  
     machine:
@@ -24,14 +25,6 @@ jobs:
 
 workflows:
   version: 2
-  untagged-build:
+  test:
     jobs:
-      - test:
-  tagged-build:
-    jobs:
-      - test:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*/
+      - test
