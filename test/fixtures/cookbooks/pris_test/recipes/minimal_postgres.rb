@@ -32,4 +32,5 @@ postgresql_user 'opennms' do
 end
 postgresql_database 'opennms' do
   owner 'opennms'
+  template 'template0'
 end
