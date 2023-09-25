@@ -42,5 +42,8 @@ namespace :integration do
   end
 end
 
+desc 'Run all integration tests'
+task integration: ['integration:vagrant']
+
 task default: %w(style unit)
 task kitchen: ['integration:vagrant']
