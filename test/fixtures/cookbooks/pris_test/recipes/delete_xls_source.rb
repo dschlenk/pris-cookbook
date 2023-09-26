@@ -1,4 +1,4 @@
-include_recipe 'pris_test::edit_xls_source'
+include_recipe 'pris_test::xls_source'
 
 pris_requisition 'delete myRouter' do
   action :delete
