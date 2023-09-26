@@ -4,7 +4,7 @@ pris_requisition 'edit myRouter' do
   requisition_name 'myRouter'
   source 'xls'
   source_properties(
-    'file' => '../myInventory.csv',
+    'file' => '../myInventory.xls',
     'count' => '3'
   )
 end
