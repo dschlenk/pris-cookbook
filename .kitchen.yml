@@ -86,12 +86,30 @@ suites:
       inspec_tests:
         - path: test/integration/default
         - path: test/integration/xls_source
-  - name: edit_xls_source
+  - name: delete_xls_source
     run_list:
       - recipe[yum-centos-ct::default]
       - recipe[pris_java::default]
-      - recipe[pris_test::edit_xls_source]
+      - recipe[pris_test::delete_xls_source]
     verifier:
       inspec_tests:
         - path: test/integration/default
-        - path: test/integration/edit_xls_source
+        - path: test/integration/delete_xls_source
+  - name: edit_script_source
+    run_list:
+      - recipe[yum-centos-ct::default]
+      - recipe[pris_java::default]
+      - recipe[pris_test::edit_script_source]
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/edit_script_source
+  - name: create_if_missing_script_source
+    run_list:
+      - recipe[yum-centos-ct::default]
+      - recipe[pris_java::default]
+      - recipe[pris_test::create_if_missing_script_source]
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/create_if_missing_script_source

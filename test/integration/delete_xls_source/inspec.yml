@@ -1,10 +1,10 @@
-name: edit_xls_source
-title: Edit existing requisition myRouter with XLS source type
+name: delete_xls_source
+title: Delete existing requisition myRouter with XLS source type
 maintainer: David Schlenk
 copyright: ConvergeOne
 copyright_email: dschlenk@convergeone.com
 license: Apache 2.0
-summary: Edit existing requisition myRouter with XLS source type
+summary: Delete existing requisition myRouter with XLS source type
 version: 1.0.0
 supports:
   - os-family: redhat
