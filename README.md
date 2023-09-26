@@ -45,7 +45,7 @@ default[:pris][:global] = { # options for $PRIS_HOME/global.properties
 | `source_properties` |       | Hash         | {}      | Additional properties to set prefixed by `source.`.                           |                                                                  |
 | `mapper`            |       | String       | 'echo'  | The type of mapper to use.                                                    |                                                                  |
 | `mapper_properties` |       | Hash         | {}      | Additional properties to set prefixed by `mapper.`.                           |                                                                  |
-| `script_file'       |       | Array        | []      | Values are joined by a comma and set to the property `script.file`            |                                                                  |
+| `script_file`       |       | Array        | []      | Values are joined by a comma and set to the property `script.file`            |                                                                  |
 
 ## Usage
 
