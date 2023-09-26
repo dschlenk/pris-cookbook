@@ -44,9 +44,9 @@ config.getInt("count").times {
     interfaceList.add(requisitionInterface)
 
     // Assign services to monitor to interface
-    monitoredServiceList.add(new RequisitionMonitoredService(null, "ICMP"))
-    monitoredServiceList.add(new RequisitionMonitoredService(null, "SNMP"))
-    monitoredServiceList.add(new RequisitionMonitoredService(null, "HTTP"))
+    monitoredServiceList.add(new RequisitionMonitoredService(null, null, "ICMP"))
+    monitoredServiceList.add(new RequisitionMonitoredService(null, null, "SNMP"))
+    monitoredServiceList.add(new RequisitionMonitoredService(null, null, "HTTP"))
 
     // Assign services for monitoring to IP interface
     requisitionInterface.getMonitoredServices().addAll(monitoredServiceList)

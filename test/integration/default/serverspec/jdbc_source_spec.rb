@@ -1,1 +1,0 @@
-../../jdbc_source/serverspec/jdbc_source_spec.rb

@@ -1,0 +1,13 @@
+name: create_if_missing_script_source
+title: Do not edit existing requisition fooscript with script source type because it already exists and action :create_if_missing is used
+maintainer: David Schlenk
+copyright: ConvergeOne
+copyright_email: dschlenk@convergeone.com
+license: Apache 2.0
+summary: Do not edit existing requisition fooscript with script source type because it already exists and action :create_if_missing is used
+version: 1.0.0
+supports:
+  - os-family: redhat
+depends:
+  - name: pris_requisition
+    path: test/integration/default

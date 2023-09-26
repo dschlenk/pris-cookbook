@@ -1,0 +1,24 @@
+---
+driver:
+  name: dokken
+  chef_version: 14
+  ports:
+    - 8000:8000
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7
+    driver:
+      image: dokken/centos-7
+      privileged: true
+      pid_one_command: /usr/lib/systemd/systemd
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro

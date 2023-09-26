@@ -1,20 +1,13 @@
 include_recipe 'pris::default'
 
-pris_requisition 'foo'
-
-cookbook_file "#{node[:pris][:home]}/requisitions/foo/foobar.xml" do
-  source 'foobar.xml'
-end
-
-pris_source 'foobar' do
+pris_requisition 'create foo' do
   requisition_name 'foo'
-  type 'file'
-  params(
-    'source.file' => 'foobar.xml'
+  source 'file'
+  source_properties(
+    'file' => 'foobar.xml'
   )
 end
 
-pris_mapper 'foobar' do
-  requisition_name 'foo'
-  type 'echo'
+cookbook_file "#{node[:pris][:home]}/requisitions/foo/foobar.xml" do
+  source 'foobar.xml'
 end

@@ -1,1 +1,0 @@
-../../merge_source/serverspec/merge_source_spec.rb

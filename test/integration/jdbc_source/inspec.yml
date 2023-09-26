@@ -1,0 +1,13 @@
+name: jdbc_source
+title: create foojdbc requisition in PRIS with jdbc source type
+maintainer: David Schlenk
+copyright: ConvergeOne
+copyright_email: dschlenk@convergeone.com
+license: Apache 2.0
+summary: create foojdbc requisition in PRIS with jdbc source type
+version: 1.0.0
+supports:
+  - os-family: redhat
+depends:
+  - name: pris_requisition
+    path: test/integration/default

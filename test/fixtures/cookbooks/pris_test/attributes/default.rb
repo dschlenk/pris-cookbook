@@ -23,9 +23,9 @@ default['postgresql']['client']['packages'] = ['postgresql93',
 default['postgresql']['server']['packages'] = ['postgresql93-server']
 default['postgresql']['contrib']['packages'] = ['postgresql93-contrib']
 default['postgresql']['server']['service_name'] = 'postgresql-9.3'
-default['postgresql']['contrib']['extensions'] = ['pageinspect',
-                                                  'pg_buffercache',
-                                                  'pg_freespacemap',
-                                                  'pgrowlocks',
-                                                  'pg_stat_statements',
-                                                  'pgstattuple']
+default['postgresql']['contrib']['extensions'] = %w(pageinspect
+                                                    pg_buffercache
+                                                    pg_freespacemap
+                                                    pgrowlocks
+                                                    pg_stat_statements
+                                                    pgstattuple)
