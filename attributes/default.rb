@@ -4,6 +4,8 @@ default['pris']['archive'] = "opennms-pris-release-#{node['pris']['version']}.ta
 default['pris']['download_url'] = "https://github.com/OpenNMS/opennms-provisioning-integration-server/releases/download/#{node['pris']['version']}/#{node['pris']['archive']}"
 default['pris']['global'] = {
   driver: 'http',
-  host: '0.0.0.0',
+  host: '127.0.0.1',
   port: 8000,
 }
+default['pris']['user'] = 'pris'
+default['pris']['java_home'] = '/usr'

@@ -24,6 +24,8 @@ default['pris']['global'] = { # options for $PRIS_HOME/global.properties
   host: '0.0.0.0',
   port: 8000,
 }
+default['pris']['user'] = 'pris' # the user to create and run the service as
+default['pris']['java_home'] = '/usr' # the directory in which `bin/java` resides
 ```
 
 ## Resources
