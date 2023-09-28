@@ -20,19 +20,26 @@
 #  compile_time true
 # end
 
-app_home = node[:pris][:home]
+app_home = node['pris']['home']
 
-filename = "#{Chef::Config['file_cache_path']}/#{node[:pris][:archive]}"
+user node['pris']['user'] do
+  system true
+  shell '/bin/false'
+  comment 'OpenNMS PRIS'
+  home app_home
+end
+
+filename = "#{Chef::Config['file_cache_path']}/#{node['pris']['archive']}"
 remote_file filename do
-  source node[:pris][:download_url]
+  source node['pris']['download_url']
   owner 'root'
   group 'root'
   mode 00644
 end
 
 directory app_home do
-  owner 'root'
-  group 'root'
+  owner node['pris']['user']
+  group node['pris']['user']
   mode 00755
 end
 
@@ -42,16 +49,21 @@ bash 'extract tarball' do
   not_if { File.exist?("#{app_home}/configured") }
 end
 
+bash "reset owner of #{app_home}" do
+  code "chown -R #{node['pris']['user']}:#{node['pris']['user']} #{app_home}"
+end
+
 template "#{app_home}/global.properties" do
   source 'global.properties.erb'
-  owner 'root'
-  group 'root'
+  owner node['pris']['user']
+  group node['pris']['user']
   mode 00644
   variables(
-    driver: node[:pris][:global][:driver],
-    host: node[:pris][:global][:host],
-    port: node[:pris][:global][:port]
+    driver: node['pris']['global']['driver'],
+    host: node['pris']['global']['host'],
+    port: node['pris']['global']['port']
   )
+  notifies :restart, 'service[opennms-pris]'
 end
 
 template '/etc/systemd/system/opennms-pris.service' do
@@ -63,6 +75,7 @@ template '/etc/systemd/system/opennms-pris.service' do
     app_home: app_home
   )
   notifies :run, 'execute[systemctl-daemon-reload]', :immediately
+  notifies :restart, 'service[opennms-pris]'
   not_if { node['platform_version'].to_i < 7 }
 end
 
@@ -72,8 +85,10 @@ template '/etc/init.d/opennms-pris' do
   group 'root'
   mode 00755
   variables(
+    java_home: node['pris']['java_home'],
     app_home: app_home
   )
+  notifies :restart, 'service[opennms-pris]'
   only_if { node['platform_version'].to_i < 7 }
 end
 

@@ -2,7 +2,7 @@
 # Cookbook Name: pris
 # Resource: requisition
 #
-# Copyright (c) 2015 ConvergeOne Holdings Corp.
+# Copyright (c) 2015-2023 ConvergeOne Holdings Corp.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,16 +29,18 @@ property :script_file, Array, default: []
 action :create do
   req_name = new_resource.requisition_name || new_resource.name
   directory req_dir(req_name) do
-    owner 'root'
-    group 'root'
-    mode '0755'
+    owner node['pris']['user']
+    group node['pris']['user']
+    mode 00755
     action :create
   end
 
   new_content = prop_content
   file req_props_path(req_name) do
+    owner node['pris']['user']
+    group node['pris']['user']
+    mode 00600
     content new_content
-    mode 0644
     action :create
   end
 end
@@ -46,17 +48,19 @@ end
 action :create_if_missing do
   req_name = new_resource.requisition_name || new_resource.name
   directory req_dir(req_name) do
-    owner 'root'
-    group 'root'
-    mode '0755'
+    owner node['pris']['user']
+    group node['pris']['user']
+    mode 00755
     action :create
     not_if { ::File.directory?(req_dir(req_name)) }
   end
 
   new_content = prop_content
   file req_props_path(req_name) do
+    owner node['pris']['user']
+    group node['pris']['user']
+    mode 00600
     content new_content
-    mode 0644
     action :create_if_missing
   end
 end
@@ -71,7 +75,7 @@ end
 
 action_class do
   def pris_home
-    node[:pris][:home]
+    node['pris']['home']
   end
 
   def req_dir(req_name)

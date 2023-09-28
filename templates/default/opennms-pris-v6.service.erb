@@ -26,7 +26,7 @@
 # set -x
 
 # Set Java home environment to use
-JAVA_BIN="/usr/bin/java"
+JAVA_BIN="<%= @java_home %>/bin/java"
 
 NAME="opennms-pris"
 
@@ -37,7 +37,7 @@ PROG_MAIN="org.opennms.pris.Starter"
 PID_FILE="/var/run/opennms-pris.pid"
 
 # Log file and directory
-LOG_DIR="/var/log"
+LOG_DIR=${PROG_DIR}
 LOG_FILE="${LOG_DIR}/opennms-pris.log"
 
 # Some sanitychecks for the required Java environment and installation path
@@ -69,21 +69,27 @@ fi
 #   exit
 # }
 start() {
-   echo -n "Starting ${NAME}: "
    if [ -f "${PID_FILE}" ] && [ "$(cat ${PID_FILE})" != "" ]; then
-      echo "FAILED"
-      echo "${NAME}-daemon with process id: $(cat ${PID_FILE}) already running."
-      exit 4
+      kill -0 $(cat ${PID_FILE}) > /dev/null 2>&1
+      if [ "$?" != "0" ]; then
+         rm ${PID_FILE}
+         start
+      else
+         echo "FAILED"
+         echo "${NAME}-daemon with process id: $(cat ${PID_FILE}) already running."
+         exit 4
+      fi
    else
+      echo -n "Starting ${NAME}: "
       cd ${PROG_DIR}
-      ${JAVA_BIN} -cp ${PROG_DIR}/lib/*:${PROG_DIR}/${PROG} ${PROG_MAIN} &>${LOG_FILE} &
+      PID=$(runuser <%= node['pris']['user'] %> -s /bin/bash -c "${JAVA_BIN} -cp ${PROG_DIR}/lib/*:${PROG_DIR}/${PROG} ${PROG_MAIN} &>${LOG_FILE} & echo \$!")
       if [ ! $? -eq 0 ]; then
         echo "FAILED"
         exit 5
       fi
-      echo "$!" > ${PID_FILE}
+      echo ${PID} > ${PID_FILE}
       if [ $? -eq 0 ]; then
-        echo "Ok"
+        echo "OK"
       else
         echo "FAILED"
         exit 6
@@ -106,7 +112,7 @@ stop() {
   if [ -f ${PID_FILE} ]; then
     kill -15 $(cat ${PID_FILE}) &>/dev/null
     if [ $? -eq 0 ]; then
-      echo "Ok"
+      echo "OK"
       rm ${PID_FILE}
       exit 0
     else

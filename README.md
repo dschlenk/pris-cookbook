@@ -15,15 +15,17 @@ This cookbook installs [OpenNMS PRIS](https://github.com/OpenNMS/opennms-provisi
 ## Attributes
 
 ```
-default[:pris][:home] = '/opt/opennms-pris' # installation location
-default[:pris][:version] = '2.0.0-b1051' # version to install
-default[:pris][:archive] = "opennms-pris-release-#{node[:pris][:version]}.tar.gz" # filename to download
-default[:pris][:download_url] = "https://github.com/OpenNMS/opennms-provisioning-integration-server/releases/download/#{node[:pris][:version]}/#{node[:pris][:archive]}" # full download location
-default[:pris][:global] = { # options for $PRIS_HOME/global.properties
+default['pris']['home'] = '/opt/opennms-pris' # installation location
+default['pris']['version'] = '2.0.0-b1051' # version to install
+default['pris']['archive'] = "opennms-pris-release-#{node['pris']['version']}.tar.gz" # filename to download
+default['pris']['download_url'] = "https://github.com/OpenNMS/opennms-provisioning-integration-server/releases/download/#{node['pris']['version']}/#{node['pris']['archive']}" # full download location
+default['pris']['global'] = { # options for $PRIS_HOME/global.properties
   driver: 'http',
   host: '0.0.0.0',
   port: 8000,
 }
+default['pris']['user'] = 'pris' # the user to create and run the service as
+default['pris']['java_home'] = '/usr' # the directory in which `bin/java` resides
 ```
 
 ## Resources
