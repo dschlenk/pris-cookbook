@@ -9,6 +9,6 @@ pris_requisition 'create fooscript' do
   )
 end
 
-cookbook_file "#{node[:pris][:home]}/requisitions/fooscript/myGroovySource.groovy" do
+cookbook_file "#{node['pris']['home']}/requisitions/fooscript/myGroovySource.groovy" do
   source 'myGroovySource.groovy'
 end

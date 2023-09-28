@@ -20,11 +20,11 @@
 #  compile_time true
 # end
 
-app_home = node[:pris][:home]
+app_home = node['pris']['home']
 
-filename = "#{Chef::Config['file_cache_path']}/#{node[:pris][:archive]}"
+filename = "#{Chef::Config['file_cache_path']}/#{node['pris']['archive']}"
 remote_file filename do
-  source node[:pris][:download_url]
+  source node['pris']['download_url']
   owner 'root'
   group 'root'
   mode 00644
@@ -48,9 +48,9 @@ template "#{app_home}/global.properties" do
   group 'root'
   mode 00644
   variables(
-    driver: node[:pris][:global][:driver],
-    host: node[:pris][:global][:host],
-    port: node[:pris][:global][:port]
+    driver: node['pris']['global']['driver'],
+    host: node['pris']['global']['host'],
+    port: node['pris']['global']['port']
   )
 end
 

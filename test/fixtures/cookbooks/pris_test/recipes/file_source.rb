@@ -8,6 +8,6 @@ pris_requisition 'create foo' do
   )
 end
 
-cookbook_file "#{node[:pris][:home]}/requisitions/foo/foobar.xml" do
+cookbook_file "#{node['pris']['home']}/requisitions/foo/foobar.xml" do
   source 'foobar.xml'
 end

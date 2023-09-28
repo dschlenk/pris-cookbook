@@ -2,7 +2,7 @@
 # Cookbook Name: pris
 # Resource: requisition
 #
-# Copyright (c) 2015 ConvergeOne Holdings Corp.
+# Copyright (c) 2015-2023 ConvergeOne Holdings Corp.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ end
 
 action_class do
   def pris_home
-    node[:pris][:home]
+    node['pris']['home']
   end
 
   def req_dir(req_name)
