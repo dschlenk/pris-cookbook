@@ -72,7 +72,8 @@ template '/etc/systemd/system/opennms-pris.service' do
   group 'root'
   mode 00755
   variables(
-    app_home: app_home
+    app_home: app_home,
+    java_home: node['pris']['java_home']
   )
   notifies :run, 'execute[systemctl-daemon-reload]', :immediately
   notifies :restart, 'service[opennms-pris]'
