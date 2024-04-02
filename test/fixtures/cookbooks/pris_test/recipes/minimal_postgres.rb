@@ -13,8 +13,8 @@ yum_repository('PostgreSQL 11') do
   repositoryid 'pgdg11'
   enabled true
   gpgcheck true
-  gpgkey 'http://apt.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-11'
-  baseurl 'http://download.postgresql.org/pub/repos/yum/11/redhat/rhel-$releasever-$basearch'
+  gpgkey 'https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL7'
+  baseurl 'https://yum-archive.postgresql.org/11/redhat/rhel-$releasever-$basearch'
 end
 postgresql_client_install 'PostgreSQL Client' do
   version node['postgresql']['version']
@@ -42,7 +42,4 @@ end
 postgresql_database 'opennms' do
   owner 'opennms'
   template 'template0'
-end
-edit_resource!(:yum_repository, 'PostgreSQL 11') do
-  baseurl 'http://download.postgresql.org/pub/repos/yum/11/redhat/rhel-$releasever-$basearch'
 end

@@ -42,7 +42,7 @@ namespace :integration do
     )
     config = Kitchen::Config.new(loader: @loader)
     config.instances.each do |instance|
-      instance.test(:always)
+      instance.test(:passing)
     end
   end
 end
