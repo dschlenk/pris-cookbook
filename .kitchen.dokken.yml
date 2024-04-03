@@ -22,3 +22,6 @@ platforms:
       pid_one_command: /usr/lib/systemd/systemd
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    attributes:
+      pris:
+        java_home: /usr/lib/jvm/java-11
