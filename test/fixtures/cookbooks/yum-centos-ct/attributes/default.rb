@@ -12,7 +12,7 @@ default['yum-centos']['repos'] = %W(
   #{contrib}
 )
 
-if node['platform_family'] == 'rhel' && node['platform_version'].to_i == 6
+if platform_family?('rhel') && node['platform_version'].to_i == 6
   default['yum']['base']['mirrorlist'] = nil
   default['yum']['updates']['mirrorlist'] = nil
   default['yum']['extras']['mirrorlist'] = nil

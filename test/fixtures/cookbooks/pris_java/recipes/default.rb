@@ -1,4 +1,4 @@
-if node['platform_family'] == 'rhel' && node['platform_version'].to_i == 6
+if platform_family?('rhel') && node['platform_version'].to_i == 6
   execute 'install corretto GPG key' do
     command 'rpm --import https://yum.corretto.aws/corretto.key'
     not_if { ::File.exist?('/etc/yum.repos.d/corretto.repo') }

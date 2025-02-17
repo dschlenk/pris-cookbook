@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: opennms-pris
+# Cookbook:: opennms-pris
 # Spec:: default
 #
-# Copyright (c) 2015 The Authors, All Rights Reserved.
+# Copyright:: (c) 2015 The Authors, All Rights Reserved.
 
 require 'spec_helper'
 

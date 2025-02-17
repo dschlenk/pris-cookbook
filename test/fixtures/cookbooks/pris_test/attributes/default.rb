@@ -17,9 +17,9 @@ default['postgresql']['pg_hba'] = [{ addr: '', db: 'all', method: 'trust',
                                    { addr: '::1/128', db: 'all',
                                      method: 'trust', type: 'host',
                                      user: 'all' }]
-default['postgresql']['client']['packages'] = ['postgresql93',
-                                               'postgresql93-contrib',
-                                               'postgresql93-devel']
+default['postgresql']['client']['packages'] = %w(postgresql93
+                                               postgresql93-contrib
+                                               postgresql93-devel)
 default['postgresql']['server']['packages'] = ['postgresql93-server']
 default['postgresql']['contrib']['packages'] = ['postgresql93-contrib']
 default['postgresql']['server']['service_name'] = 'postgresql-9.3'
