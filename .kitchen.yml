@@ -4,6 +4,9 @@ driver:
   network:
     - ["forwarded_port", {guest: 8000, host: 8000, auto_correct: true}]
 
+transport:
+  name: dokken
+
 provisioner:
   name: dokken
   require_chef_omnibus:  13.10.0
@@ -28,16 +31,6 @@ verifier:
 
 suites:
   - name: default
-    run_list:
-      - recipe[yum-centos-ct::default]
-      - recipe[pris_java::default]
-      - recipe[pris::default]
-      - recipe[pris_test::file_source]
-      - recipe[pris_test::http_source]
-      - recipe[pris_test::jdbc_source]
-      - recipe[pris_test::merge_source]
-      - recipe[pris_test::script_source]
-      - recipe[pris_test::xls_source]
     verifier:
       inspec_tests:
         - path: test/integration/default
