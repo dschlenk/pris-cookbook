@@ -27,3 +27,8 @@ jobs:
       - run:
           name: kitchen
           command: rake integration
+workflows:
+  version: 2
+  untagged-build:
+    jobs:
+      - test
