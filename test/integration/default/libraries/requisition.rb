@@ -37,7 +37,7 @@ class PrisRequisition < Inspec.resource(1)
       end
       @script_file = []
       @script_file = props[:script_file].split(',') unless props[:script_file].nil?
-      @content = RestClient.get("http://localhost:8000/requisitions/#{req_name}").body
+      @content = RestClient.get("http://localhost:8008/requisitions/#{req_name}").body
     end
   end
 

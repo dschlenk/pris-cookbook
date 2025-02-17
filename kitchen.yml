@@ -4,6 +4,8 @@ driver:
   privileged: true
   chef_image: cincproject/cinc
   chef_version: 18
+  ports:
+    - 8008:8000
 
 transport:
   name: dokken
