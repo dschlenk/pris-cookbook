@@ -20,13 +20,13 @@ jobs:
           command: cinc exec bundle install
       - run:
           name: cookstyle
-          command: rake style
+          command: cinc exec rake style
       - run:
           name: chefspec
-          command: rake unit
+          command: cinc exec rake unit
       - run:
           name: kitchen
-          command: rake integration
+          command: cinc exec rake integration
 workflows:
   version: 2
   untagged-build:
