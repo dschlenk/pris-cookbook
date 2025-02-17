@@ -48,70 +48,64 @@ suites:
         - path: test/integration/script_source
         - path: test/integration/xls_source
   - name: file_source
-    run_list:
-      - recipe[yum-centos-ct::default]
-      - recipe[pris_java::default]
-      - recipe[pris_test::file_source]
+    provisioner:
+      policyfile: test/policyfiles/file_source.rb
     verifier:
       inspec_tests:
         - path: test/integration/default
         - path: test/integration/file_source
   - name: http_source
-    run_list:
-      - recipe[yum-centos-ct::default]
-      - recipe[pris_java::default]
-      - recipe[pris_test::http_source]
+    provisioner:
+      policyfile: test/policyfiles/http_source.rb
     verifier:
       inspec_tests:
         - path: test/integration/default
         - path: test/integration/http_source
   - name: jdbc_source
-    run_list:
-      - recipe[yum-centos-ct::default]
-      - recipe[pris_java::default]
-      - recipe[pris_test::jdbc_source]
+    provisioner:
+      policyfile: test/policyfiles/jdbc_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/jdbc_source
   - name: merge_source
-    run_list:
-      - recipe[yum-centos-ct::default]
-      - recipe[pris_java::default]
-      - recipe[pris_test::merge_source]
+    provisioner:
+      policyfile: test/policyfiles/merge_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/merge_source
   - name: script_source
-    run_list:
-      - recipe[yum-centos-ct::default]
-      - recipe[pris_java::default]
-      - recipe[pris_test::script_source]
+    provisioner:
+      policyfile: test/policyfiles/script_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/script_source
   - name: xls_source
-    run_list:
-      - recipe[yum-centos-ct::default]
-      - recipe[pris_java::default]
-      - recipe[pris_test::xls_source]
+    provisioner:
+      policyfile: test/policyfiles/xls_source.rb
     verifier:
       inspec_tests:
         - path: test/integration/default
         - path: test/integration/xls_source
   - name: delete_xls_source
-    run_list:
-      - recipe[yum-centos-ct::default]
-      - recipe[pris_java::default]
-      - recipe[pris_test::delete_xls_source]
+    provisioner:
+      policyfile: test/policyfiles/delete_xls_source.rb
     verifier:
       inspec_tests:
         - path: test/integration/default
         - path: test/integration/delete_xls_source
   - name: edit_script_source
-    run_list:
-      - recipe[yum-centos-ct::default]
-      - recipe[pris_java::default]
-      - recipe[pris_test::edit_script_source]
+    provisioner:
+      policyfile: test/policyfiles/edit_script_source.rb
     verifier:
       inspec_tests:
         - path: test/integration/default
         - path: test/integration/edit_script_source
   - name: create_if_missing_script_source
-    run_list:
-      - recipe[yum-centos-ct::default]
-      - recipe[pris_java::default]
-      - recipe[pris_test::create_if_missing_script_source]
+    provisioner:
+      policyfile: test/policyfiles/create_if_missing_script_source.rb
     verifier:
       inspec_tests:
         - path: test/integration/default
