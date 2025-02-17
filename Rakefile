@@ -34,13 +34,9 @@ namespace :integration do
   desc 'Run Test Kitchen with Vagrant'
   task :vagrant do
     Kitchen.logger = Kitchen.default_file_logger
-    @loader = Kitchen::Loader::YAML.new(
-      project_config: './.kitchen.yml',
-      local_config: './.kitchen.dokken.yml'
-    )
-    config = Kitchen::Config.new(loader: @loader)
+    config = Kitchen::Config.new
     config.instances.each do |instance|
-      instance.test(:passing)
+      instance.test(:always)
     end
   end
 end
