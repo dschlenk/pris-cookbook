@@ -14,7 +14,7 @@ describe 'pris::default' do
     end
 
     it 'downloads pris' do
-      expect(chef_run).to create_remote_file("#{Chef::Config['file_cache_path']}/opennms-pris-release-2.0.0-b1051.tar.gz").with(source: 'https://github.com/OpenNMS/opennms-provisioning-integration-server/releases/download/2.0.0-b1051/opennms-pris-release-2.0.0-b1051.tar.gz')
+      expect(chef_run).to create_remote_file("#{Chef::Config['file_cache_path']}/opennms-pris-release-2.1.0-b2132.tar.gz").with(source: 'https://github.com/OpenNMS/opennms-provisioning-integration-server/releases/download/2.1.0-b2132/opennms-pris-release-2.1.0-b2132.tar.gz')
     end
 
     it 'creates a template with the global.properties' do
