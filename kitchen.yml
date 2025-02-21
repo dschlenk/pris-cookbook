@@ -24,7 +24,7 @@ platforms:
       pid_one_command: /usr/lib/systemd/systemd
     attributes:
       pris:
-        java_home: /usr/lib/jvm/java-11
+        java_home: /usr/lib/jvm/java-17
   
 verifier:
   name: inspec

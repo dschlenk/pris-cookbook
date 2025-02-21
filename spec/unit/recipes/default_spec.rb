@@ -37,19 +37,4 @@ describe 'pris::default' do
       expect(chef_run).to create_template('/etc/systemd/system/opennms-pris.service')
     end
   end
-
-  context 'When all attributes are default, on the platform centos 6.10' do
-    let(:chef_run) do
-      runner = ChefSpec::ServerRunner.new(platform: 'centos', version: '6.10')
-      runner.converge(described_recipe)
-    end
-
-    it 'converges successfully' do
-      expect { chef_run }.to_not raise_error
-    end
-
-    it 'creates a template for the service in /etc/init.d' do
-      expect(chef_run).to create_template('/etc/init.d/opennms-pris')
-    end
-  end
 end

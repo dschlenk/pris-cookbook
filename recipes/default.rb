@@ -77,20 +77,6 @@ template '/etc/systemd/system/opennms-pris.service' do
   )
   notifies :run, 'execute[systemctl-daemon-reload]', :immediately
   notifies :restart, 'service[opennms-pris]'
-  not_if { node['platform_version'].to_i < 7 }
-end
-
-template '/etc/init.d/opennms-pris' do
-  source 'opennms-pris-v6.service.erb'
-  owner 'root'
-  group 'root'
-  mode '755'
-  variables(
-    java_home: node['pris']['java_home'],
-    app_home: app_home
-  )
-  notifies :restart, 'service[opennms-pris]'
-  only_if { node['platform_version'].to_i < 7 }
 end
 
 execute 'systemctl-daemon-reload' do
