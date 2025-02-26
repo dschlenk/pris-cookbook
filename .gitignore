@@ -13,3 +13,6 @@ bin/*
 
 .kitchen/
 .kitchen.local.yml
+
+Policyfile.lock.json
+test/policyfiles/*.lock.json

@@ -1,8 +1,8 @@
 #
-# Cookbook Name: pris
+# Cookbook:: Name: pris
 # Resource: requisition
 #
-# Copyright (c) 2015-2023 ConvergeOne Holdings Corp.
+# Copyright:: (c) 2015-2023 ConvergeOne Holdings Corp.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 # limitations under the License.
 
 provides :pris_requisition
+unified_mode true
 
-property :name, String,  name_property: true
 property :requisition_name, String
 property :source, String, default: 'file', equal_to: ['file', 'http', 'jdbc', 'merge', 'script', 'xls', 'ocs.computers', 'ocs.devices']
 property :source_properties, Hash, default: {}
@@ -31,7 +31,7 @@ action :create do
   directory req_dir(req_name) do
     owner node['pris']['user']
     group node['pris']['user']
-    mode 00755
+    mode '755'
     action :create
   end
 
@@ -39,7 +39,7 @@ action :create do
   file req_props_path(req_name) do
     owner node['pris']['user']
     group node['pris']['user']
-    mode 00600
+    mode '600'
     content new_content
     action :create
   end
@@ -50,7 +50,7 @@ action :create_if_missing do
   directory req_dir(req_name) do
     owner node['pris']['user']
     group node['pris']['user']
-    mode 00755
+    mode '755'
     action :create
     not_if { ::File.directory?(req_dir(req_name)) }
   end
@@ -59,7 +59,7 @@ action :create_if_missing do
   file req_props_path(req_name) do
     owner node['pris']['user']
     group node['pris']['user']
-    mode 00600
+    mode '600'
     content new_content
     action :create_if_missing
   end
