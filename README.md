@@ -4,8 +4,8 @@ This cookbook installs [OpenNMS PRIS](https://github.com/OpenNMS/opennms-provisi
 
 ## Requirements
 
- - CentOS 6 or CentOS 7
- - Java 11
+ - CentOS 7+
+ - Java 17
  - Chef 13+
 
 ## Recipes
@@ -51,14 +51,14 @@ default['pris']['java_home'] = '/usr' # the directory in which `bin/java` reside
 
 ## Usage
 
-Include the default recipe in your run list if you'd like to install PRIS. Use the `pris_requisition` resource to manage requisitions. See the [recipes in the pris_test](test/fixtures/cookbooks/pris_test/recipes) test fixture cookbook and the corresponding [inspec tests](test/integration) for examples of using each different source type. Note that it is your responsibility to ensure that any external resources (files, etc) referenced by your requisition actually exist.
+Include the default recipe in your run list if you'd like to install PRIS. Use the `pris_requisition` resource to manage requisitions. See the [recipes in the pris\_test](test/fixtures/cookbooks/pris_test/recipes) test fixture cookbook and the corresponding [inspec tests](test/integration) for examples of using each different source type. Note that it is your responsibility to ensure that any external resources (files, etc) referenced by your requisition actually exist.
 
 License & Authors
 -----------------
 - Author: David Schlenk <dschlenk@convergeone.com>
 
 ```text
-Copyright: 2015-2023 ConvergeOne Holdings Corp
+Copyright: 2015-2025 ConvergeOne Holdings Corp
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: opennms-pris
+# Cookbook:: opennms-pris
 # Recipe:: default
 #
-# Copyright (c) 2015 ConvergeOne Holdings Corp.
+# Copyright:: (c) 2015 ConvergeOne Holdings Corp.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,19 +34,19 @@ remote_file filename do
   source node['pris']['download_url']
   owner 'root'
   group 'root'
-  mode 00644
+  mode '644'
 end
 
 directory app_home do
   owner node['pris']['user']
   group node['pris']['user']
-  mode 00755
+  mode '755'
 end
 
 bash 'extract tarball' do
   code "tar -zxvf #{filename} --strip 1 && touch #{app_home}/configured"
   cwd app_home
-  not_if { File.exist?("#{app_home}/configured") }
+  not_if { ::File.exist?("#{app_home}/configured") }
 end
 
 bash "reset owner of #{app_home}" do
@@ -57,7 +57,7 @@ template "#{app_home}/global.properties" do
   source 'global.properties.erb'
   owner node['pris']['user']
   group node['pris']['user']
-  mode 00644
+  mode '644'
   variables(
     driver: node['pris']['global']['driver'],
     host: node['pris']['global']['host'],
@@ -70,27 +70,13 @@ template '/etc/systemd/system/opennms-pris.service' do
   source 'opennms-pris.service.erb'
   owner 'root'
   group 'root'
-  mode 00755
+  mode '755'
   variables(
     java_home: node['pris']['java_home'],
     app_home: app_home
   )
   notifies :run, 'execute[systemctl-daemon-reload]', :immediately
   notifies :restart, 'service[opennms-pris]'
-  not_if { node['platform_version'].to_i < 7 }
-end
-
-template '/etc/init.d/opennms-pris' do
-  source 'opennms-pris-v6.service.erb'
-  owner 'root'
-  group 'root'
-  mode 00755
-  variables(
-    java_home: node['pris']['java_home'],
-    app_home: app_home
-  )
-  notifies :restart, 'service[opennms-pris]'
-  only_if { node['platform_version'].to_i < 7 }
 end
 
 execute 'systemctl-daemon-reload' do

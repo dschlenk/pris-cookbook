@@ -1,0 +1,105 @@
+---
+driver:
+  name: dokken
+  privileged: true
+  chef_image: cincproject/cinc
+  chef_version: 18
+  ports:
+    - 8008:8000
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+  product_name: cinc
+  download_url: https://omnitruck.cinc.sh/install.sh
+  chef_binary: /opt/cinc/bin/cinc-client
+  chef_license: accept-no-persist
+
+platforms:
+  - name: oraclelinux-9
+    driver:
+      image: dokken/oraclelinux-9
+      pid_one_command: /usr/lib/systemd/systemd
+    attributes:
+      pris:
+        java_home: /usr/lib/jvm/java-17
+  
+verifier:
+  name: inspec
+
+suites:
+  - name: default
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/file_source
+        - path: test/integration/http_source
+        - path: test/integration/jdbc_source
+        - path: test/integration/merge_source
+        - path: test/integration/script_source
+        - path: test/integration/xls_source
+  - name: file_source
+    provisioner:
+      policyfile: test/policyfiles/file_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/file_source
+  - name: http_source
+    provisioner:
+      policyfile: test/policyfiles/http_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/http_source
+  - name: jdbc_source
+    provisioner:
+      policyfile: test/policyfiles/jdbc_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/jdbc_source
+  - name: merge_source
+    provisioner:
+      policyfile: test/policyfiles/merge_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/merge_source
+  - name: script_source
+    provisioner:
+      policyfile: test/policyfiles/script_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/script_source
+  - name: xls_source
+    provisioner:
+      policyfile: test/policyfiles/xls_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/xls_source
+  - name: delete_xls_source
+    provisioner:
+      policyfile: test/policyfiles/delete_xls_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/delete_xls_source
+  - name: edit_script_source
+    provisioner:
+      policyfile: test/policyfiles/edit_script_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/edit_script_source
+  - name: create_if_missing_script_source
+    provisioner:
+      policyfile: test/policyfiles/create_if_missing_script_source.rb
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
+        - path: test/integration/create_if_missing_script_source
