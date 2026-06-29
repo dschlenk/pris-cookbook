@@ -83,4 +83,3 @@ postgresql_access 'add local scram' do
   user 'all'
   auth_method 'scram-sha-256'
 end
-
