@@ -16,6 +16,7 @@ provisioner:
   download_url: https://omnitruck.cinc.sh/install.sh
   chef_binary: /opt/cinc/bin/cinc-client
   chef_license: accept-no-persist
+  log_level: <%= ENV['KITCHEN_LOG_LEVEL'] || 'info' %>
 
 platforms:
   - name: oraclelinux-9
