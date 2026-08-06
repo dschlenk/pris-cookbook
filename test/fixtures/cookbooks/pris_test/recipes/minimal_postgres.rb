@@ -23,6 +23,29 @@ postgresql_config 'postgresql-server' do
   action :create
 end
 
+postgresql_service 'postgresql' do
+  action %i(enable start)
+  notifies :set_password, 'postgresql_user[postgres]', :immediately
+end
+
+postgresql_user 'postgres' do
+  ignore_failure true # this fails after the password gets set initially
+  unencrypted_password 'sergtsop'
+  action :nothing
+end
+
+postgresql_user 'opennms' do
+  password 'sergtsop'
+  login true
+  unencrypted_password 'opennms'
+  superuser true
+end
+
+postgresql_database 'opennms' do
+  password 'sergtsop'
+  owner 'opennms'
+end
+
 %w(127.0.0.1/32 ::1/128).each do |h|
   postgresql_access "postgresql #{h} host access" do
     type 'host'
@@ -59,27 +82,4 @@ postgresql_access 'add local scram' do
   database 'all'
   user 'all'
   auth_method 'scram-sha-256'
-end
-
-postgresql_service 'postgresql' do
-  action %i(enable start)
-end
-
-postgresql_user 'postgres' do
-  ignore_failure true # this fails after the password gets set initially
-  unencrypted_password 'sergtsop'
-  action :set_password
-end
-
-bash 'make opennms role' do
-  ignore_failure true
-  code 'createuser -U postgres -s opennms'
-end
-bash 'set opennms passwd' do
-  ignore_failure true
-  code "psql -U postgres -c \"ALTER USER opennms PASSWORD 'opennms';\""
-end
-bash 'create opennms db' do
-  ignore_failure true
-  code 'createdb -U opennms opennms'
 end
